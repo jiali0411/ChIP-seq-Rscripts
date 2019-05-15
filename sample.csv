@@ -1,0 +1,11 @@
+﻿SampleID,Tissue,Factor,Condition,Replicate,Peaks,PeakCaller
+T1_rep1,0,H3K27me,Endo,1,peaks/T1_rep1_peaks.broadPeak,macs
+T1_rep2,0,H3K27me,Endo,2,peaks/T1_rep2_peaks.broadPeak,macs
+T2_rep1,500,H3K27me,Endo,1,peaks/T2_rep1_peaks.broadPeak,macs
+T2_rep2,500,H3K27me,Endo,2,peaks/T2_rep2_peaks.broadPeak,macs
+T3_rep1,1000,H3K27me,Eco,1,peaks/T3_rep1_peaks.broadPeak,macs
+T3_rep2,1000,H3K27me,Eco,2,peaks/T3_rep2_peaks.broadPeak,macs
+D3_rep1,Day3,H3K27me,preBloom,1,peaks/D3_rep1_peaks.broadPeak,macs
+D3_rep2,Day3,H3K27me,preBloom,2,peaks/D3_rep2_peaks.broadPeak,macs
+D7_rep1,Day7,H3K27me,Sepal,1,peaks/D7_rep1_peaks.broadPeak,macs
+D7_rep2,Day7,H3K27me,Sepal,2,peaks/D7_rep2_peaks.broadPeak,macs
