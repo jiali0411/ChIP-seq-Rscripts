@@ -52,11 +52,34 @@ write.csv(BindingScore, "consensusBind.csv")
 
 # Differential binding analysis
 Histone_macs = dba.count(Histone_macs, minOverlap=2)
-Histone_macs <- dba.contrast(Histone_macs, group1 = Histone_macs$masks$`0`, group2 = Histone_macs$masks$`500`, categories=DBA_TISSUE)
-Histone_macs <- dba.contrast(Histone_macs, group1 = Histone_macs$masks$`0`, group2 = Histone_macs$masks$`1000`, categories=DBA_TISSUE)
-Histone_macs <- dba.contrast(Histone_macs, group1 = Histone_macs$masks$`0`, group2 = Histone_macs$masks$Day3, categories=DBA_TISSUE)
-Histone_macs <- dba.contrast(Histone_macs, group1 = Histone_macs$masks$`0`, group2 = Histone_macs$masks$Day7, categories=DBA_TISSUE)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "chill", name2 = "warm", categories = DBA_TREATMENT)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "Endo", name2 = "PostEndo", group1 = Histone_macs$masks$Endo, group2 = Histone_macs$masks$postEndo)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "T1", name2 = "T2",group1 = Histone_macs$masks$`0`, group2 = Histone_macs$masks$`500`, categories=DBA_TISSUE)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "T1", name2 = "T3",group1 = Histone_macs$masks$`0`, group2 = Histone_macs$masks$`1000`, categories=DBA_TISSUE)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "T1", name2 = "D3",group1 = Histone_macs$masks$`0`, group2 = Histone_macs$masks$Day3, categories=DBA_TISSUE)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "T1", name2 = "D7",group1 = Histone_macs$masks$`0`, group2 = Histone_macs$masks$Day7, categories=DBA_TISSUE)
+Histone_macs <- dba.contrast(Histone_macs, name1 = 'T3', name2 = 'D3',group1 = Histone_macs$masks$`1000`, group2 = Histone_macs$masks$Day3)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "T2", name2 = 'T3',group1 = Histone_macs$masks$`500`,group2 = Histone_macs$masks$`1000`)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "D3", name2 = "D7", group1 = Histone_macs$masks$Day3, group2 = Histone_macs$masks$Day7)
+Histone_macs <- dba.contrast(Histone_macs, name1 = "T2", name2 = "D3", group1 = Histone_macs$masks$`500`, group2 = Histone_macs$masks$Day3)
+# a contrast of endo vs postEndo automatically exists
 dba.show(Histone_macs, bContrasts = T)
 
 DffBind = dba.analyze(Histone_macs)
+DffBind
+DffBind_CvW = dba.report(DffBind, contrast = 1)
+DffBind_EvP = dba.report(DffBind, contrast = 2)
+DffBind_1v2 = dba.report(DffBind, contrast = 3)
+DffBind_1v3 = dba.report(DffBind, contrast = 4)
+DffBind_1vD3 = dba.report(DffBind, contrast = 5)
+DffBind_1vD7 = dba.report(DffBind, contrast = 6)
 
+corvals = dba.plotHeatmap(DffBind, contrast = 2, correlations = FALSE, attributes = DBA_TISSUE)
+
+#-----------load gene info-----------------
+genelocation <- read.table("~/Desktop/Jiali/UTK/Apricot/geneloc.txt", header = F)
+genelocation <- genelocation[,c(1,4,5,9)]
+genelocation$V9 <- colsplit(genelocation$V9,";",c('a', 'b'))
+genelocation$V9$a <- gsub("ID=","",genelocation$V9$a)
+genelocation$V9 <- genelocation$V9[,c(1)]
+rownames(genelocation) <- genelocation$V9
