@@ -22,9 +22,10 @@ tamoxifen.DB = dba.report(tamoxifen)
 corvals = dba.plotHeatmap(tamoxifen, correlations = FALSE)
 dba.plotPCA(tamoxifen, method = DBA_EDGER_BLOCK, attributes = c(DBA_TISSUE, DBA_CONDITION, DBA_REPLICATE))
 
+
 sample <- read.csv("tamoxifen.csv", header = T) 
 # I follow the tamoxifen.csv file format to create my own data, in the working folder as sample.csv
-#-----------------load own data-------------------------------
+#-----------------load my own data-------------------------------
 setwd("~/Desktop/Jiali/UTK/Peach/USDA_peach/ChIP/ChIP-seq-Rscripts/")
 Histone = dba(sampleSheet = "sample.csv")
 dba.plotPCA(Histone, method = DBA_EDGER_BLOCK, attributes = c(DBA_TISSUE, DBA_CALLER))
@@ -83,3 +84,12 @@ genelocation$V9 <- colsplit(genelocation$V9,";",c('a', 'b'))
 genelocation$V9$a <- gsub("ID=","",genelocation$V9$a)
 genelocation$V9 <- genelocation$V9[,c(1)]
 rownames(genelocation) <- genelocation$V9
+
+write.table(DffBind_CvW, "chillvsWarm_DBpeaks.txt")
+write.table(DffBind_EvP, "EndovsPost_DBpeaks.txt")
+write.table(DffBind_1v2, "T1vsT2_DBpeaks.txt")
+write.table(DffBind_1v3, "T1vsT3_DBpeaks.txt")
+write.table(DffBind_1vD3, "T1vsD3_DBpeaks.txt")
+write.table(DffBind_1vD7, "T1vsD7_DBpeaks.txt")
+write.table(genelocation, "geneloc.txt")
+
