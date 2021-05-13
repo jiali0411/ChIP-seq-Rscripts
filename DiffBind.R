@@ -90,11 +90,16 @@ dba.show(Histone_macs, bContrasts = T)
 DffBind = dba.analyze(Histone_macs)
 DffBind
 DffBind_CvW = dba.report(DffBind, contrast = 1)
-DffBind_EvP = dba.report(DffBind, contrast = 2)
-DffBind_1v2 = dba.report(DffBind, contrast = 1)
-DffBind_1v3 = dba.report(DffBind, contrast = 2)
-DffBind_1vD3 = dba.report(DffBind, contrast = 3)
-DffBind_1vD7 = dba.report(DffBind, contrast = 4)
+DffBind_1v2 = dba.report(DffBind, contrast = 2)
+DffBind_1v3 = dba.report(DffBind, contrast = 3)
+DffBind_1vD3 = dba.report(DffBind, contrast = 4)
+DffBind_1vD7 = dba.report(DffBind, contrast = 5)
+DffBind_3vD3 = dba.report(DffBind, contrast = 6)
+DffBind_3vD7 = dba.report(DffBind, contrast = 7)
+DffBind_2v3 = dba.report(DffBind, contrast = 8)
+DffBind_2vD3 = dba.report(DffBind, contrast = 10)
+
+
 
 #-----------load gene info-----------------
 library(reshape2)
@@ -106,12 +111,15 @@ genelocation$V9 <- genelocation$V9[,c(1)]
 rownames(genelocation) <- genelocation$V9
 
 write.table(DffBind_CvW, "chillvsWarm_DBpeaks.txt")
-write.table(DffBind_EvP, "EndovsPost_DBpeaks.txt")
-write.table(DffBind_1v2, "T1vsT2_DBpeaks_0812.txt")
-write.table(DffBind_1v3, "T1vsT3_DBpeaks_0812.txt")
-write.table(DffBind_1vD3, "T1vsD3_DBpeaks_0812.txt")
-write.table(DffBind_1vD7, "T1vsD7_DBpeaks_0812.txt")
-write.table(genelocation, "geneloc.txt")
+write.table(DffBind_1v2, "T1vsT2_DBpeaks_2021.txt")
+write.table(DffBind_1v3, "T1vsT3_DBpeaks_2021.txt")
+write.table(DffBind_1vD3, "T1vsD3_DBpeaks_2021.txt")
+write.table(DffBind_1vD7, "T1vsD7_DBpeaks_2021.txt")
+write.table(DffBind_3vD3, "T3vsD3_DBpeaks_2021.txt") 
+write.table(DffBind_3vD7, "T3vsD7_DBpeaks_2021.txt")
+write.table(DffBind_2v3, "T2vsT3_DBpeaks_2021.txt")
+write.table(DffBind_2vD3, "T2vsD3_DBpeaks_2021.txt")
+#write.table(genelocation, "geneloc.txt")
 
 # ------------compare T3 with D3 and D7--------------------
 DffBind_3vD3 = dba.report(DffBind, contrast = 1)
